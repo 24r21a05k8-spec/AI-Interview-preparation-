@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { Zap, Target, BarChart3, ArrowRight, CheckCircle2, Star, Bot, Cpu, Shield } from 'lucide-react'
-import { RobotHead, CircuitLines, HexGrid, AIBrain } from '../components/RoboIcon'
+import { CircuitLines, HexGrid, AIBrain } from '../components/RoboIcon'
 
 const features = [
   { icon: Bot,      title: 'AI Robot Interviewer',  desc: 'Our AI engine generates role-specific questions with the precision of a senior engineer.', color: 'text-cyan-400',    bg: 'rgba(0,255,255,0.08)',   border: 'rgba(0,255,255,0.2)' },
@@ -39,75 +39,106 @@ export default function Landing() {
       </nav>
 
       {/* Hero */}
-      <section className="relative pt-20 pb-24 px-6 overflow-hidden">
-        {/* Decorative elements */}
-        <div className="absolute top-10 right-10 opacity-20 animate-float">
-          <RobotHead className="w-32 h-32" />
+      <section className="relative pt-16 pb-24 px-6 overflow-hidden">
+        {/* Background glows */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] rounded-full blur-3xl pointer-events-none" style={{ background: 'radial-gradient(ellipse, rgba(0,255,255,0.05) 0%, rgba(0,128,255,0.04) 40%, transparent 70%)' }} />
+        <div className="absolute bottom-0 left-10 opacity-10 pointer-events-none">
+          <HexGrid className="w-48 h-48" />
         </div>
-        <div className="absolute bottom-10 left-10 opacity-10">
-          <HexGrid className="w-40 h-40" />
+        <div className="absolute top-1/3 right-0 opacity-8 pointer-events-none">
+          <CircuitLines className="w-56 h-28" />
         </div>
-        <div className="absolute top-1/2 right-1/4 opacity-10">
-          <CircuitLines className="w-48 h-24" />
-        </div>
-        <div className="absolute top-20 left-1/4 w-64 h-64 rounded-full blur-3xl pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(0,255,255,0.06) 0%, transparent 70%)' }} />
-        <div className="absolute bottom-20 right-1/4 w-64 h-64 rounded-full blur-3xl pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(0,128,255,0.06) 0%, transparent 70%)' }} />
 
-        <div className="max-w-5xl mx-auto relative flex flex-col md:flex-row items-center gap-10">
-          {/* Text content */}
-          <div className="flex-1 text-center md:text-left">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-8 animate-fade-up" style={{ background: 'rgba(0,255,255,0.08)', border: '1px solid rgba(0,255,255,0.2)' }}>
-              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
-              <span className="text-cyan-400 text-sm font-medium">Powered by GPT-4 Neural Engine</span>
-            </div>
+        <div className="max-w-6xl mx-auto relative">
+          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
 
-            <h1 className="text-5xl md:text-6xl font-extrabold leading-tight tracking-tight mb-6 animate-fade-up animate-delay-100">
-              <span className="text-white">Where Preparation</span><br />
-              <span className="gradient-text">Meets Precision.</span>
-            </h1>
+            {/* ── Left: Text ── */}
+            <div className="flex-1 text-center lg:text-left">
+              {/* Badge */}
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-7 animate-fade-up" style={{ background: 'rgba(0,255,255,0.07)', border: '1px solid rgba(0,255,255,0.18)' }}>
+                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+                <span className="text-cyan-400 text-sm font-medium tracking-wide">Powered by GPT-4 Neural Engine</span>
+              </div>
 
-            <p className="text-xl text-slate-400 max-w-xl mb-10 leading-relaxed animate-fade-up animate-delay-200">
-              Role-based AI question generation powered by advanced language models. Practice smarter with a robot that knows exactly what interviewers ask.
-            </p>
-
-            <div className="flex flex-col sm:flex-row items-center md:justify-start justify-center gap-4 mb-10 animate-fade-up animate-delay-300">
-              <button onClick={() => navigate('/signup')} className="btn-primary px-8 py-3.5 text-base w-full sm:w-auto">
-                Get Started Free <ArrowRight className="w-4 h-4" />
-              </button>
-              <button onClick={() => navigate('/login')} className="btn-secondary px-8 py-3.5 text-base w-full sm:w-auto">
-                Sign In
-              </button>
-            </div>
-
-            <div className="flex items-center md:justify-start justify-center gap-6 text-sm text-slate-500 animate-fade-up animate-delay-300">
-              {['No credit card required', 'Free to start', '10k+ engineers'].map(t => (
-                <span key={t} className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-cyan-500" /> {t}
+              {/* Headline */}
+              <h1 className="font-extrabold leading-[1.08] tracking-tight mb-5 animate-fade-up animate-delay-100">
+                <span className="block text-4xl md:text-5xl lg:text-6xl text-white mb-1">Train Smarter.</span>
+                <span className="block text-4xl md:text-5xl lg:text-6xl text-white mb-1">Interview Stronger.</span>
+                <span className="block text-3xl md:text-4xl lg:text-5xl mt-3" style={{ background: 'linear-gradient(135deg, #00ffff 0%, #0080ff 55%, #8040ff 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+                  Where Preparation Meets Precision.
                 </span>
-              ))}
-            </div>
-          </div>
+              </h1>
 
-          {/* Robot image */}
-          <div className="flex-shrink-0 flex items-center justify-center animate-fade-up animate-delay-200">
-            <div className="relative">
-              {/* Glow ring behind robot */}
-              <div className="absolute inset-0 rounded-full blur-3xl" style={{ background: 'radial-gradient(circle, rgba(0,255,255,0.2) 0%, rgba(0,128,255,0.1) 50%, transparent 70%)', transform: 'scale(1.2)' }} />
-              {/* Orbit ring */}
-              <div className="absolute inset-0 rounded-full border border-cyan-500/20 animate-spin" style={{ animationDuration: '8s', transform: 'scale(1.15)' }} />
-              <div className="absolute inset-0 rounded-full border border-blue-500/10 animate-spin" style={{ animationDuration: '12s', animationDirection: 'reverse', transform: 'scale(1.3)' }} />
-              {/* Robot image with float animation */}
-              <img
-                src="/robo.png"
-                alt="AI Robot"
-                className="relative w-64 h-64 md:w-80 md:h-80 object-contain animate-float drop-shadow-2xl"
-                style={{ filter: 'drop-shadow(0 0 24px rgba(0,255,255,0.3)) drop-shadow(0 0 48px rgba(0,128,255,0.2))' }}
-              />
-              {/* Floating particles */}
-              <div className="absolute top-4 right-4 w-2 h-2 rounded-full bg-cyan-400 animate-ping" style={{ animationDuration: '2s' }} />
-              <div className="absolute bottom-8 left-4 w-1.5 h-1.5 rounded-full bg-blue-400 animate-ping" style={{ animationDuration: '3s', animationDelay: '1s' }} />
-              <div className="absolute top-1/2 right-0 w-1 h-1 rounded-full bg-violet-400 animate-ping" style={{ animationDuration: '2.5s', animationDelay: '0.5s' }} />
+              {/* Subtext */}
+              <p className="text-lg text-slate-400 max-w-lg mb-8 leading-relaxed animate-fade-up animate-delay-200">
+                AI-generated, role-specific interview questions that mirror what top companies actually ask. Stop guessing. Start acing.
+              </p>
+
+              {/* CTAs */}
+              <div className="flex flex-col sm:flex-row items-center lg:justify-start justify-center gap-3 mb-8 animate-fade-up animate-delay-300">
+                <button onClick={() => navigate('/signup')} className="btn-primary px-8 py-3.5 text-base w-full sm:w-auto">
+                  Start Preparing Free <ArrowRight className="w-4 h-4" />
+                </button>
+                <button onClick={() => navigate('/login')} className="btn-secondary px-7 py-3.5 text-base w-full sm:w-auto">
+                  Sign In
+                </button>
+              </div>
+
+              {/* Trust badges */}
+              <div className="flex flex-wrap items-center lg:justify-start justify-center gap-5 text-sm text-slate-500 animate-fade-up animate-delay-300">
+                {['No credit card required', 'Free to start', '10k+ engineers'].map(t => (
+                  <span key={t} className="flex items-center gap-1.5">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-cyan-500" /> {t}
+                  </span>
+                ))}
+              </div>
             </div>
+
+            {/* ── Right: Robot ── */}
+            <div className="flex-shrink-0 flex items-center justify-center animate-fade-up animate-delay-200">
+              <div className="relative w-72 h-72 md:w-96 md:h-96">
+
+                {/* Outer slow-spin ring */}
+                <div className="absolute inset-0 rounded-full border border-cyan-500/15 animate-spin" style={{ animationDuration: '14s' }} />
+                {/* Inner reverse-spin ring */}
+                <div className="absolute inset-4 rounded-full border border-blue-500/10 animate-spin" style={{ animationDuration: '9s', animationDirection: 'reverse' }} />
+
+                {/* Glow blob */}
+                <div className="absolute inset-0 rounded-full blur-2xl" style={{ background: 'radial-gradient(circle, rgba(0,255,255,0.18) 0%, rgba(0,128,255,0.1) 50%, transparent 75%)' }} />
+
+                {/* Scan line sweep */}
+                <div className="absolute inset-0 rounded-full overflow-hidden pointer-events-none">
+                  <div className="absolute w-full h-0.5 bg-gradient-to-r from-transparent via-cyan-400/40 to-transparent animate-bounce" style={{ top: '45%', animationDuration: '3s' }} />
+                </div>
+
+                {/* Robot image — float + subtle scale pulse */}
+                <img
+                  src="/robo.png"
+                  alt="AI Interview Robot"
+                  className="absolute inset-0 w-full h-full object-contain animate-float"
+                  style={{
+                    filter: 'drop-shadow(0 0 28px rgba(0,255,255,0.35)) drop-shadow(0 0 56px rgba(0,128,255,0.2)) drop-shadow(0 8px 24px rgba(0,0,0,0.5))',
+                    animationDuration: '4s',
+                  }}
+                />
+
+                {/* Floating data chips */}
+                <div className="absolute -top-2 -right-4 px-3 py-1.5 rounded-xl text-xs font-mono font-semibold animate-bounce" style={{ animationDuration: '2.5s', background: 'rgba(0,255,255,0.1)', border: '1px solid rgba(0,255,255,0.25)', color: '#00ffff' }}>
+                  GPT-4 ✦
+                </div>
+                <div className="absolute -bottom-2 -left-4 px-3 py-1.5 rounded-xl text-xs font-mono font-semibold animate-bounce" style={{ animationDuration: '3.2s', animationDelay: '0.8s', background: 'rgba(0,128,255,0.1)', border: '1px solid rgba(0,128,255,0.25)', color: '#60a5fa' }}>
+                  AI Ready
+                </div>
+                <div className="absolute top-1/2 -right-8 px-2.5 py-1 rounded-lg text-xs font-mono animate-bounce" style={{ animationDuration: '2.8s', animationDelay: '0.4s', background: 'rgba(128,0,255,0.1)', border: '1px solid rgba(128,0,255,0.25)', color: '#a78bfa' }}>
+                  10k+
+                </div>
+
+                {/* Corner accent dots */}
+                <div className="absolute top-6 left-6 w-2 h-2 rounded-full bg-cyan-400 animate-ping" style={{ animationDuration: '2s' }} />
+                <div className="absolute bottom-10 right-8 w-1.5 h-1.5 rounded-full bg-blue-400 animate-ping" style={{ animationDuration: '3s', animationDelay: '1s' }} />
+              </div>
+            </div>
+
           </div>
         </div>
 
