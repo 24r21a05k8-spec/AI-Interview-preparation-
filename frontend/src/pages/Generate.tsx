@@ -141,7 +141,7 @@ export default function Generate() {
                   <div className="flex items-start gap-3">
                     <span className="font-mono text-xs mt-1 shrink-0 w-5" style={{ color: 'rgba(0,255,255,0.3)' }}>{String(i + 1).padStart(2, '0')}</span>
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm text-slate-300 leading-relaxed">{q.text}</p>
+                      <p className="text-sm text-white leading-relaxed font-medium">{q.text}</p>
                       <div className="flex items-center gap-2 mt-3">
                         <span className="text-xs px-2.5 py-0.5 rounded-full font-mono" style={{ background: ts.bg, border: `1px solid ${ts.border}`, color: ts.color }}>{ts.label}</span>
                         <span className="text-xs px-2.5 py-0.5 rounded-full font-mono" style={{ background: ds.bg, border: `1px solid ${ds.border}`, color: ds.color }}>{q.difficulty}</span>
@@ -162,9 +162,9 @@ export default function Generate() {
                 </div>
                 {expanded === q.id && (
                   <div className="px-5 pb-5 animate-fade-in">
-                    <div className="pt-4" style={{ borderTop: '1px solid rgba(0,255,255,0.08)' }}>
-                      <p className="text-xs font-mono text-slate-600 mb-2">// sample_answer</p>
-                      <p className="text-sm text-slate-400 leading-relaxed">{q.answer}</p>
+                    <div className="pt-4" style={{ borderTop: '1px solid rgba(0,245,255,0.08)' }}>
+                      <p className="text-xs font-mono mb-2" style={{ color: '#00F5FF' }}>// sample_answer</p>
+                      <p className="text-sm text-slate-300 leading-relaxed">{q.answer}</p>
                     </div>
                   </div>
                 )}

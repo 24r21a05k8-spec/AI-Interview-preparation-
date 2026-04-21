@@ -9,14 +9,14 @@ const savedQuestions = [
 ]
 
 const typeBadge: Record<string, string> = {
-  technical:       'bg-indigo-50 dark:bg-indigo-500/10 text-indigo-700 dark:text-indigo-300',
-  behavioral:      'bg-slate-100 dark:bg-white/8 text-slate-600 dark:text-white/50',
-  'system-design': 'bg-violet-50 dark:bg-violet-500/10 text-violet-700 dark:text-violet-300',
+  technical:       'text-indigo-300',
+  behavioral:      'text-slate-300',
+  'system-design': 'text-violet-300',
 }
 const diffBadge: Record<string, string> = {
-  beginner:     'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400',
-  intermediate: 'bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-400',
-  advanced:     'bg-red-50 dark:bg-red-500/10 text-red-700 dark:text-red-400',
+  beginner:     'text-emerald-400',
+  intermediate: 'text-amber-400',
+  advanced:     'text-red-400',
 }
 
 export default function Saved() {
@@ -35,16 +35,16 @@ export default function Saved() {
     <div className="max-w-3xl mx-auto space-y-6 animate-fade-up">
       <div className="flex items-start justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Saved Questions</h1>
-          <p className="text-slate-500 dark:text-white/40 text-sm mt-1">{questions.length} questions bookmarked.</p>
+          <h1 className="text-2xl font-bold text-white">Saved Questions</h1>
+          <p className="text-slate-400 text-sm mt-1">{questions.length} questions bookmarked.</p>
         </div>
       </div>
 
       {questions.length === 0 ? (
         <div className="card py-20 text-center">
-          <Bookmark className="w-10 h-10 text-slate-300 dark:text-white/15 mx-auto mb-3" />
-          <p className="text-slate-500 dark:text-white/40 font-medium">No saved questions yet</p>
-          <p className="text-slate-400 dark:text-white/25 text-sm mt-1">Bookmark questions while generating to see them here.</p>
+          <Bookmark className="w-10 h-10 mx-auto mb-3" style={{ color: '#00F5FF', opacity: 0.3 }} />
+          <p className="text-slate-400 font-medium">No saved questions yet</p>
+          <p className="text-slate-500 text-sm mt-1">Bookmark questions while generating to see them here.</p>
         </div>
       ) : (
         <div className="space-y-3">
@@ -52,10 +52,10 @@ export default function Saved() {
             <div key={q.id} className="card overflow-hidden hover:shadow-md dark:hover:border-white/20 transition-all">
               <div className="p-5">
                 <div className="flex items-start gap-3">
-                  <span className="text-slate-300 dark:text-white/20 font-mono text-xs mt-1 shrink-0">{String(i + 1).padStart(2, '0')}</span>
+                  <span className="font-mono text-xs mt-1 shrink-0" style={{ color: '#00F5FF' }}>{String(i + 1).padStart(2, '0')}</span>
                   <div className="flex-1 min-w-0">
-                    <p className="text-xs text-slate-400 dark:text-white/30 mb-1.5">{q.role}</p>
-                    <p className="text-sm text-slate-800 dark:text-white/85 leading-relaxed">{q.text}</p>
+                    <p className="text-xs font-medium mb-1.5" style={{ color: '#00F5FF' }}>{q.role}</p>
+                    <p className="text-sm leading-relaxed font-medium text-white">{q.text}</p>
                     <div className="flex items-center gap-2 mt-3">
                       <span className={`badge ${typeBadge[q.type]}`}>{q.type}</span>
                       <span className={`badge ${diffBadge[q.difficulty]}`}>{q.difficulty}</span>
@@ -76,9 +76,9 @@ export default function Saved() {
               </div>
               {expanded === q.id && (
                 <div className="px-5 pb-5 animate-fade-in">
-                  <div className="border-t border-slate-100 dark:border-white/5 pt-4">
-                    <p className="text-xs font-semibold text-slate-400 dark:text-white/25 uppercase tracking-wider mb-2">Sample Answer</p>
-                    <p className="text-sm text-slate-600 dark:text-white/55 leading-relaxed">{q.answer}</p>
+                  <div className="border-t pt-4" style={{ borderColor: 'rgba(0,245,255,0.1)' }}>
+                    <p className="text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: '#00F5FF' }}>Sample Answer</p>
+                    <p className="text-sm leading-relaxed text-slate-300">{q.answer}</p>
                   </div>
                 </div>
               )}

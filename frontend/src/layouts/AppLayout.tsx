@@ -19,35 +19,35 @@ export default function AppLayout() {
   const handleLogout = () => { localStorage.removeItem('token'); navigate('/login') }
 
   return (
-    <div className="flex h-screen bg-cyber overflow-hidden">
+    <div className="flex h-screen overflow-hidden" style={{ background: '#0A0A0F' }}>
       {sidebarOpen && (
         <div className="fixed inset-0 z-20 bg-black/70 lg:hidden" onClick={() => setSidebarOpen(false)} />
       )}
 
       {/* Sidebar */}
       <aside className={`fixed lg:static inset-y-0 left-0 z-30 w-60 flex flex-col transition-transform duration-300 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}
-        style={{ background: 'rgba(6, 10, 20, 0.98)', borderRight: '1px solid rgba(0,255,255,0.08)' }}>
+        style={{ background: '#111115', borderRight: '1px solid #2A2A3A' }}>
 
         {/* Logo */}
-        <div className="flex items-center gap-2.5 px-5 h-16" style={{ borderBottom: '1px solid rgba(0,255,255,0.08)' }}>
-          <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #00ffff, #0080ff)', boxShadow: '0 0 16px rgba(0,255,255,0.4)' }}>
+        <div className="flex items-center gap-2.5 px-5 h-16" style={{ borderBottom: '1px solid #2A2A3A' }}>
+          <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: '#00FF88', boxShadow: '0 0 16px rgba(0, 255, 136, 0.4)' }}>
             <Bot className="w-4 h-4 text-black" />
           </div>
-          <span className="font-bold text-white tracking-tight">Interview<span className="text-cyan-400">AI</span></span>
+          <span className="font-bold text-white tracking-tight">Interview<span className="text-[#00FF88]">AI</span></span>
           <button className="ml-auto lg:hidden btn-ghost p-1" onClick={() => setSidebarOpen(false)}>
             <X className="w-4 h-4" />
           </button>
         </div>
 
         {/* Status indicator */}
-        <div className="mx-3 mt-3 px-3 py-2 rounded-xl flex items-center gap-2" style={{ background: 'rgba(0,255,255,0.05)', border: '1px solid rgba(0,255,255,0.1)' }}>
-          <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-          <span className="text-xs text-slate-400 font-mono">AI Engine: <span className="text-emerald-400">Online</span></span>
+        <div className="mx-3 mt-3 px-3 py-2 rounded-xl flex items-center gap-2" style={{ background: 'rgba(0, 255, 136, 0.05)', border: '1px solid rgba(0, 255, 136, 0.1)' }}>
+          <div className="w-1.5 h-1.5 rounded-full bg-[#00FF88] animate-pulse" />
+          <span className="text-xs text-[#8888AA] font-mono">AI Engine: <span className="text-[#00FF88]">Online</span></span>
         </div>
 
         {/* Nav */}
         <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
-          <p className="text-xs font-semibold text-slate-600 uppercase tracking-wider px-3 mb-3 font-mono">// Navigation</p>
+          <p className="text-xs font-semibold text-[#8888AA] uppercase tracking-wider px-3 mb-3 font-mono">// Navigation</p>
           {navItems.map(({ to, icon: Icon, label, color }) => (
             <NavLink
               key={to} to={to}
@@ -66,9 +66,9 @@ export default function AppLayout() {
         </div>
 
         {/* Bottom */}
-        <div className="px-3 py-4 space-y-1" style={{ borderTop: '1px solid rgba(0,255,255,0.08)' }}>
+        <div className="px-3 py-4 space-y-1" style={{ borderTop: '1px solid #2A2A3A' }}>
           <button onClick={() => navigate('/app/profile')} className="sidebar-item-inactive w-full">
-            <User className="w-4 h-4 text-slate-500" /> Profile
+            <User className="w-4 h-4 text-[#8888AA]" /> Profile
           </button>
           <button onClick={handleLogout} className="sidebar-item-inactive w-full" style={{ color: 'rgba(255,80,80,0.8)' }}>
             <LogOut className="w-4 h-4" /> Sign Out
@@ -79,41 +79,44 @@ export default function AppLayout() {
       {/* Main */}
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
         {/* Topbar */}
-        <header className="h-16 flex items-center gap-4 px-6 shrink-0" style={{ background: 'rgba(6,10,20,0.98)', borderBottom: '1px solid rgba(0,255,255,0.08)' }}>
+        <header className="h-16 flex items-center gap-4 px-6 shrink-0" style={{ background: '#111115', borderBottom: '1px solid #2A2A3A' }}>
           <button className="lg:hidden btn-ghost p-2 rounded-lg" onClick={() => setSidebarOpen(true)}>
             <Menu className="w-5 h-5" />
           </button>
 
           {/* System status */}
-          <div className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-lg" style={{ background: 'rgba(0,255,255,0.05)', border: '1px solid rgba(0,255,255,0.1)' }}>
-            <Cpu className="w-3.5 h-3.5 text-cyan-400" />
-            <span className="text-xs text-slate-400 font-mono">GPT-4 <span className="text-cyan-400">ready</span></span>
+          <div className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-lg" style={{ background: 'rgba(0, 255, 136, 0.05)', border: '1px solid rgba(0, 255, 136, 0.1)' }}>
+            <Cpu className="w-3.5 h-3.5 text-[#00FF88]" />
+            <span className="text-xs text-[#8888AA] font-mono">LPI-4 <span className="text-[#00FF88]">ready</span></span>
           </div>
 
           <div className="flex-1" />
 
           <button className="btn-ghost p-2 rounded-xl relative">
-            <Bell className="w-4 h-4 text-slate-400" />
-            <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: '#00ffff' }} />
+            <Bell className="w-4 h-4 text-[#8888AA]" />
+            <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: '#00FF88' }} />
           </button>
 
           <div className="relative">
             <button onClick={() => setProfileOpen(p => !p)} className="flex items-center gap-2.5 px-3 py-1.5 rounded-xl transition-colors" style={{ border: '1px solid transparent' }}
-              onMouseEnter={e => (e.currentTarget.style.borderColor = 'rgba(0,255,255,0.2)')}
+              onMouseEnter={e => (e.currentTarget.style.borderColor = 'rgba(0, 255, 136, 0.2)')}
               onMouseLeave={e => (e.currentTarget.style.borderColor = 'transparent')}>
-              <div className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold text-black" style={{ background: 'linear-gradient(135deg, #00ffff, #0080ff)' }}>
+              <div className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold text-black" style={{ background: '#00FF88' }}>
                 J
               </div>
-              <span className="hidden sm:block text-sm font-medium text-slate-300">John Doe</span>
-              <ChevronDown className="w-3.5 h-3.5 text-slate-500" />
+              <span className="hidden sm:block text-sm font-medium text-white">John Doe</span>
+              <ChevronDown className="w-3.5 h-3.5 text-[#8888AA]" />
             </button>
 
             {profileOpen && (
-              <div className="absolute right-0 top-full mt-2 w-48 rounded-xl py-1 z-50 animate-fade-up" style={{ background: 'rgba(8,15,30,0.98)', border: '1px solid rgba(0,255,255,0.15)', boxShadow: '0 8px 32px rgba(0,0,0,0.5)' }}>
-                <button className="flex items-center gap-2.5 w-full px-4 py-2.5 text-sm text-slate-400 hover:text-cyan-300 hover:bg-cyan-500/5 transition-colors">
+              <div className="absolute right-0 top-full mt-2 w-48 rounded-xl py-1 z-50 animate-fade-up" style={{ background: '#1A1A24', border: '1px solid #2A2A3A', boxShadow: '0 8px 32px rgba(0, 0, 0, 0.5)' }}>
+                <button 
+                  onClick={() => { navigate('/app/profile'); setProfileOpen(false); }}
+                  className="flex items-center gap-2.5 w-full px-4 py-2.5 text-sm text-[#8888AA] hover:text-[#00FF88] hover:bg-[rgba(0,255,136,0.05)] transition-colors"
+                >
                   <User className="w-4 h-4" /> Profile
                 </button>
-                <div className="my-1" style={{ borderTop: '1px solid rgba(0,255,255,0.08)' }} />
+                <div className="my-1" style={{ borderTop: '1px solid #2A2A3A' }} />
                 <button onClick={handleLogout} className="flex items-center gap-2.5 w-full px-4 py-2.5 text-sm text-red-400 hover:bg-red-500/10 transition-colors">
                   <LogOut className="w-4 h-4" /> Sign Out
                 </button>

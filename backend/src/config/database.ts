@@ -1,4 +1,5 @@
-import { createClient, SupabaseClient } from '@supabase/supabase-js';
+import { createClient } from '@supabase/supabase-js';
+import type { SupabaseClient } from '@supabase/supabase-js';
 import { config } from './config.js';
 
 // Database types based on our schema
@@ -77,57 +78,86 @@ export interface SessionQuestion {
   created_at: string;
 }
 
-// Database schema type for Supabase
-export interface Database {
+// Database schema type for Supabase - must match exact structure Supabase expects
+export type Json =
+  | string
+  | number
+  | boolean
+  | null
+  | { [key: string]: Json | undefined }
+  | Json[]
+
+export type Database = {
   public: {
     Tables: {
       user_profiles: {
-        Row: UserProfile;
-        Insert: Omit<UserProfile, 'id' | 'created_at' | 'updated_at'> & { id: string };
-        Update: Partial<Omit<UserProfile, 'id' | 'created_at' | 'updated_at'>>;
-      };
+        Row: UserProfile
+        Insert: Omit<UserProfile, 'id' | 'created_at' | 'updated_at'> & { id?: string }
+        Update: Partial<Omit<UserProfile, 'id' | 'created_at' | 'updated_at'>>
+        Relationships: []
+      }
       roles: {
-        Row: Role;
-        Insert: Omit<Role, 'id' | 'created_at' | 'updated_at'>;
-        Update: Partial<Omit<Role, 'id' | 'created_at' | 'updated_at'>>;
-      };
+        Row: Role
+        Insert: Omit<Role, 'id' | 'created_at' | 'updated_at'>
+        Update: Partial<Omit<Role, 'id' | 'created_at' | 'updated_at'>>
+        Relationships: []
+      }
       skills: {
-        Row: Skill;
-        Insert: Omit<Skill, 'id' | 'created_at' | 'updated_at'>;
-        Update: Partial<Omit<Skill, 'id' | 'created_at' | 'updated_at'>>;
-      };
+        Row: Skill
+        Insert: Omit<Skill, 'id' | 'created_at' | 'updated_at'>
+        Update: Partial<Omit<Skill, 'id' | 'created_at' | 'updated_at'>>
+        Relationships: []
+      }
       user_roles: {
-        Row: { id: string; user_id: string; role_id: string; created_at: string };
-        Insert: { user_id: string; role_id: string };
-        Update: never;
-      };
+        Row: { id: string; user_id: string; role_id: string; created_at: string }
+        Insert: { user_id: string; role_id: string }
+        Update: never
+        Relationships: []
+      }
       user_skills: {
-        Row: { id: string; user_id: string; skill_id: string; created_at: string };
-        Insert: { user_id: string; skill_id: string };
-        Update: never;
-      };
+        Row: { id: string; user_id: string; skill_id: string; created_at: string }
+        Insert: { user_id: string; skill_id: string }
+        Update: never
+        Relationships: []
+      }
       role_skills: {
-        Row: { id: string; role_id: string; skill_id: string; created_at: string };
-        Insert: { role_id: string; skill_id: string };
-        Update: never;
-      };
+        Row: { id: string; role_id: string; skill_id: string; created_at: string }
+        Insert: { role_id: string; skill_id: string }
+        Update: never
+        Relationships: []
+      }
       interview_sessions: {
-        Row: InterviewSession;
-        Insert: Omit<InterviewSession, 'id' | 'created_at' | 'updated_at'>;
-        Update: Partial<Omit<InterviewSession, 'id' | 'created_at' | 'updated_at'>>;
-      };
+        Row: InterviewSession
+        Insert: Omit<InterviewSession, 'id' | 'created_at' | 'updated_at'>
+        Update: Partial<Omit<InterviewSession, 'id' | 'created_at' | 'updated_at'>>
+        Relationships: []
+      }
       questions: {
-        Row: Question;
-        Insert: Omit<Question, 'id' | 'created_at' | 'updated_at'>;
-        Update: Partial<Omit<Question, 'id' | 'created_at' | 'updated_at'>>;
-      };
+        Row: Question
+        Insert: Omit<Question, 'id' | 'created_at' | 'updated_at'>
+        Update: Partial<Omit<Question, 'id' | 'created_at' | 'updated_at'>>
+        Relationships: []
+      }
       session_questions: {
-        Row: SessionQuestion;
-        Insert: Omit<SessionQuestion, 'id' | 'created_at'>;
-        Update: Partial<Omit<SessionQuestion, 'id' | 'created_at'>>;
-      };
-    };
-  };
+        Row: SessionQuestion
+        Insert: Omit<SessionQuestion, 'id' | 'created_at'>
+        Update: Partial<Omit<SessionQuestion, 'id' | 'created_at'>>
+        Relationships: []
+      }
+    }
+    Views: {
+      [_ in never]: never
+    }
+    Functions: {
+      [_ in never]: never
+    }
+    Enums: {
+      [_ in never]: never
+    }
+    CompositeTypes: {
+      [_ in never]: never
+    }
+  }
 }
 
 // Create Supabase client instances
@@ -137,7 +167,7 @@ let supabaseServiceClient: SupabaseClient<Database> | null = null;
 /**
  * Get the Supabase client for user operations (uses anon key)
  */
-export function getSupabaseClient(): SupabaseClient<Database> {
+export function getSupabaseClient() {
   if (!supabaseClient) {
     if (!config.supabase.url || !config.supabase.anonKey) {
       throw new Error('Supabase URL and anon key must be configured');
@@ -161,7 +191,7 @@ export function getSupabaseClient(): SupabaseClient<Database> {
 /**
  * Get the Supabase service client for admin operations (uses service role key)
  */
-export function getSupabaseServiceClient(): SupabaseClient<Database> {
+export function getSupabaseServiceClient() {
   if (!supabaseServiceClient) {
     if (!config.supabase.url || !config.supabase.serviceRoleKey) {
       throw new Error('Supabase URL and service role key must be configured');
